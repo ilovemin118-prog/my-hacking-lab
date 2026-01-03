@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+    <meta charset="UTF-8">
+    <title>VIP Member Portal</title>
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        /* CSS: แต่งให้ดูเหมือนเว็บจริง */
+        body {
+            background: #1a1a1a;
+            color: #00ff00;
+            font-family: 'Courier New', monospace;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .login-box {
+            border: 2px solid #00ff00;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 0 20px #00ff00;
+        }
+
+        input {
+            background: #333;
+            border: 1px solid #00ff00;
+            color: #fff;
+            padding: 10px;
+            margin: 10px 0;
+            width: 100%;
+        }
+
+        button {
+            background: #00ff00;
+            color: #000;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            width: 100%;
+            font-weight: bold;
+        }
+
+        strong {
+            margin-top: 10px;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <div
+        style="margin-top: 30px; padding: 15px; border: 1px dashed #00ff00; background: #000; color: #ff0000; font-size: 0.9rem; max-width: 500px; text-align: left;">
+        <strong class="i1">[ ข้อตกลงการใช้งาน - Lab Security ]</strong><br>
+        1. เว็บไซต์นี้สร้างขึ้นเพื่อ <u>การศึกษาและทดสอบเจาะระบบ</u> เท่านั้น<br>
+        2. อนุญาตให้ทดสอบเฉพาะจุดที่ระบุ (เช่น Login Form) ห้ามโจมตีเซิร์ฟเวอร์หลัก<br>
+        3. ผู้ทดสอบต้องไม่กระทำการใดๆ ที่ก่อให้เกิดความเสียหายต่อระบบหรือผู้อื่น<br>
+        4. เจ้าของระบบ (min-dev) จะไม่รับผิดชอบต่อความเสียหายใดๆ ที่เกิดจากการใช้งานที่ผิดวัตถุประสงค์<br>
+        <br>
+        <span style="color: #00ff00;">&copy; 2026 min-dev | Authorized Pentesting Only</span>
+    </div>
+
+
+    <div class="login-box i1">
+        <h2>ADMIN ACCESS ONLY</h2>
+        <input type="text" id="username" placeholder="Username">
+        <input type="password" id="password" placeholder="Password">
+        <button onclick="checkLogin()">LOGIN</button>
+        <p id="message"></p>
+    </div>
+
+
+
+    <footer class="i1" style="margin-top: 20px; font-size: 0.8rem; color: #555;">
+        <p>&copy; 2026 min-dev | This is a Vulnerable Lab for Educational Purposes.</p>
+    </footer>
+
+    <script>
+        alert("**โปรดอ่านข้อลงตก**")
+        alert("ไม่ว่าคุณจะเป็นใครก็สามารถเจาระบบเว็บนี้ได้อย่างถูกกฎหมาย")
+        // JS: นี่คือจุดที่ "รั่ว" (Client-side Logic Leak)
+        // แฮ็กเกอร์สามารถดูโค้ดนี้ได้ผ่านการกด F12 ในเบราว์เซอร์!
+        function checkLogin() {
+            const user = document.getElementById('username').value;
+            const pass = document.getElementById('password').value;
+
+            // ช่องโหว่: เก็บ Hardcoded Credentials ไว้ในเครื่องฝั่งผู้ใช้
+            if (user === "admin" && pass === "p@ssw0rd2024") {
+                alert("ยินดีด้วย! คุณเจาะเข้าสู่ระบบสำเร็จ");
+                window.location.href = "https://www.google.com"; // สมมติว่าเป็นหน้าลับ
+            } else {
+                document.getElementById('message').innerText = "Access Denied!";
+            }
+        }
+    </script>
+
+</body>
+
+</html>
